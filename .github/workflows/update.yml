@@ -1,0 +1,33 @@
+name: 自动更新去广告规则
+
+on:
+  schedule:
+    - cron: '0 22 * * *' # 每天北京时间早上6点自动运行 (UTC 22:00)
+  workflow_dispatch: # 允许手动点击运行
+
+permissions:
+  contents: write
+
+jobs:
+  update-rules:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Python 环境
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: 运行转换脚本
+        run: python extract.py
+
+      - name: 提交并推送更改
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add sr_ad_clean.txt
+          # 如果文件有变动才提交，没有变动则跳过
+          git commit -m "Auto update clean rules" || echo "No changes to commit"
+          git push
