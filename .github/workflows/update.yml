@@ -21,7 +21,7 @@ jobs:
           python-version: '3.x'
 
       - name: 运行转换脚本
-        run: python extract.py
+        run: python convert.py
 
       - name: 提交并推送更改
         run: |
