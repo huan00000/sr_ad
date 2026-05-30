@@ -27,7 +27,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add sr_ad_clean.txt
+          git add sr_ad_clean.list
           # 如果文件有变动才提交，没有变动则跳过
           git commit -m "Auto update clean rules" || echo "No changes to commit"
           git push
