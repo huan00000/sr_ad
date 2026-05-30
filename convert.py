@@ -31,12 +31,12 @@ def fetch_and_clean():
             clean_rules.append(f"{rule_type},{domain}")
 
     # 将清洗后的规则写入新文件
-    with open("sr_ad_clean.txt", "w", encoding='utf-8') as f:
+    with open("sr_ad_clean.list", "w", encoding='utf-8') as f:
         f.write("# 自动提取自 Johnshall 仓库，已去除策略(Reject)\n")
         f.write("\n".join(clean_rules))
         f.write("\n")
         
-    print("规则转换完成并保存为 sr_ad_clean.txt")
+    print("规则转换完成并保存为 sr_ad_clean.list")
 
 if __name__ == "__main__":
     fetch_and_clean()
